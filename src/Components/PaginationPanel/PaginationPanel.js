@@ -1,26 +1,46 @@
-import Pagination from 'react-bootstrap/Pagination';
 import Container from 'react-bootstrap/Container';
 
-const PaginationPanel = () => {
+const PaginationPanel = ({
+  pages,
+  handleClickPage,
+  handlePaginationPages,
+  currentPage,
+}) => {
   return (
     <Container className="d-flex justify-content-center" fluid="xl">
-      <Pagination>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis />
-
-        <Pagination.Item>{10}</Pagination.Item>
-        <Pagination.Item>{11}</Pagination.Item>
-        <Pagination.Item active>{12}</Pagination.Item>
-        <Pagination.Item>{13}</Pagination.Item>
-        <Pagination.Item disabled>{14}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
+      <nav aria-label="Page navigation" onClick={handlePaginationPages}>
+        <ul className="pagination">
+          <li
+            className={currentPage === 1 ? 'page-item disabled' : 'page-item'}
+          >
+            <a className="page-link" href="#section">
+              Previous
+            </a>
+          </li>
+          {pages.map((page) => (
+            <li
+              className={
+                currentPage === page ? 'page-item active' : 'page-item'
+              }
+              onClick={() => handleClickPage(page)}
+              key={page}
+            >
+              <a className="page-link" href="#section">
+                {page}
+              </a>
+            </li>
+          ))}
+          <li
+            className={
+              currentPage === pages.length ? 'page-item disabled' : 'page-item'
+            }
+          >
+            <a className="page-link" href="#section">
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
     </Container>
   );
 };

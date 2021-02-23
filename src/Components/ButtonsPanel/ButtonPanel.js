@@ -1,11 +1,20 @@
 import Button from 'react-bootstrap/Button';
 
-const ButtonPanel = () => {
+const ButtonPanel = ({ handleToggleSizeData }) => {
   return (
     <div className="d-flex justify-content-end p-3">
-      <Button variant="outline-primary">Большие данные</Button>
-      <Button className="ml-2" variant="outline-primary">
-        Маленькие данные
+      <Button
+        onClick={() => handleToggleSizeData('big')}
+        variant="outline-primary"
+      >
+        Большие данные (1000 строк)
+      </Button>
+      <Button
+        onClick={() => handleToggleSizeData('small')}
+        className="ml-2"
+        variant="outline-primary"
+      >
+        Маленькие данные (32 строки)
       </Button>
     </div>
   );
